@@ -1,0 +1,6 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import * as from<%= camelize(featureKey) %> from './<%= dasherize(featureKey) %>.reducer';
+
+export const select<%= classify(featureKey) %>State = createFeatureSelector<from<%= camelize(featureKey) %>.<%= classify(featureKey) %>State>(
+  from<%= camelize(featureKey) %>.<%= featureKey %>FeatureKey
+);

@@ -1,0 +1,21 @@
+{
+  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add schematic to project",
+      "factory": "./ng-add/index#ngAdd"
+    },
+    "wwc-component": {
+      "description": "Add wwc component to project",
+      "factory": "./wwc-component/index#wwcComponent",
+      "schema": "./wwc-component/schema.json",
+      "aliases": ["c", "component"]
+    },
+    "wwc-store": {
+      "description": "Add wwc store module to project",
+      "factory": "./wwc-store/index#wwcStore",
+      "schema": "./wwc-store/schema.json",
+      "aliases": ["s", "store"]
+    }
+  }
+}

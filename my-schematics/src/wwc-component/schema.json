@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "WwcComponentSchematics",
+  "title": "Wwwc Component Options Schema",
+  "type": "object",
+  "description": "Schema for wwc component",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the file",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "Provide a component name"
+    },
+    "includeStore": {
+      "type": "boolean",
+      "description": "Include store in component",
+      "default": "false",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "Would you like to add the ngrx store to this component?"
+    },
+    "includeForm": {
+      "type": "boolean",
+      "description": "Include form in component",
+      "default": "false",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      },
+      "x-prompt": "Would you like Form Builder added to this component?"
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the component.",
+      "x-prompt": "Component path? /src/app/"
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    }
+  },
+  "required": [
+    "name",
+    "includeStore",
+    "includeForm"
+  ]
+}

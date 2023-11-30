@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "WwcStoreSchematics",
+  "title": "Wwwc Store Options Schema",
+  "type": "object",
+  "description": "Schema for wwc store",
+  "properties": {
+    "featureKey": {
+      "type": "string",
+      "description": "The name of the store feature",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "Provide a feature key name"
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the store.",
+      "$default": {
+        "$source": "workingDirectory"
+      },
+      "x-prompt": "Store path? /src/app/"
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    }
+  },
+  "required": [
+    "featureKey"
+  ]
+}

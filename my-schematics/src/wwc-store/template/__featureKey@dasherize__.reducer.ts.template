@@ -1,0 +1,19 @@
+import { createReducer, ActionCreator } from '@ngrx/store';
+
+export const <%= featureKey %>FeatureKey = '<%= featureKey %>';
+
+export interface <%= classify(featureKey) %>State {
+  loading: boolean;
+  error: any;
+}
+
+export const initialState: <%= classify(featureKey) %>State = {
+  loading: false,
+  error: null
+}
+const <%= featureKey %>Reducer = createReducer(
+  initialState
+);
+
+export const reducer = (state: <%= classify(featureKey) %>State | undefined, action: ActionCreator) => <%= featureKey %>Reducer(state, action);
+

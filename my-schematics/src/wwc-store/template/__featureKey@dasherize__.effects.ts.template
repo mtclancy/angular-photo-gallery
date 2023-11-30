@@ -1,0 +1,18 @@
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { tap } from 'rxjs';
+import { <%= classify(featureKey) %>ActionGroup } from './<%= dasherize(featureKey) %>.actions';
+
+@Injectable()
+export class <%= classify(featureKey) %>Effects {
+  constructor(
+    private actions$: Actions
+  ) { }
+
+  exampleEffectByRoute$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(<%= classify(featureKey) %>ActionGroup.default<%= classify(featureKey) %>Request),
+      tap(() => console.log("effect triggered"))
+    ), {dispatch: false}
+  );
+}
