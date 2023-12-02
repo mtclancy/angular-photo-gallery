@@ -3,11 +3,13 @@ import { AlbumContainerComponent } from './views/album-container/album-container
 import { AlbumsComponent } from './views/albums/albums.component';
 import { AlbumRoutingModule } from './routing/album.routing';
 import { CommonModule } from '@angular/common';
+import { AlbumService } from './services/album.service';
+import { LayoutsModule } from '../layouts/layouts.module';
 
 @NgModule({
-  imports: [CommonModule, AlbumRoutingModule],
+  imports: [CommonModule, AlbumRoutingModule, LayoutsModule],
   exports: [],
   declarations: [AlbumContainerComponent, AlbumsComponent],
-  providers: [],
+  providers: [AlbumService],
 })
 export class AlbumModule {}
