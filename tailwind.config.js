@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        custom: ['Nova Square', 'sans-serif']
+      },
       colors: {
         'blue': '#2563EB',
         'purple': '#9333EA',

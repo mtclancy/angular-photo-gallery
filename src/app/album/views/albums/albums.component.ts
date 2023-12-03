@@ -20,6 +20,8 @@ export class AlbumsComponent implements OnInit, OnDestroy {
 
   unsubscribe$ = new Subject();
   albums: Array<Album> = [];
+  albumId: string = '';
+  loading = false;
 
   ngOnInit(): void {
     this.store
@@ -27,12 +29,14 @@ export class AlbumsComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.unsubscribe$),
         switchMap((params: { [key: string]: string }) => {
-          const albumId = params['albumId'] ? params['albumId'] : '';
-          return this.albumService.fetchAlbumById(albumId);
+          this.albumId = params['albumId'] ? params['albumId'] : '';
+          this.loading = true;
+          return this.albumService.fetchAlbumById(this.albumId);
         })
       )
       .subscribe((albums: Array<Album>) => {
         this.albums = albums;
+        this.loading = false;
       });
   }
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subject, debounceTime } from 'rxjs';
 
@@ -8,6 +8,8 @@ import { Subject, debounceTime } from 'rxjs';
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent {
+  @Input() placeholder = 'search';
+  @Input() defaultSearch: string | undefined;
   @Output() valueChange = new EventEmitter<string>();
   searchControl = new FormControl();
   subject$ = new Subject<string>();

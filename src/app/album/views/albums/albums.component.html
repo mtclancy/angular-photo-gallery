@@ -1,3 +1,26 @@
-<p>albums works!</p>
-<app-search-bar
-  (valueChange)="updateSearch($event)"></app-search-bar>
+<div class="flex flex-col justify-center my-12 mx-8">
+  <div class="w-full mb-4">
+    <h1 class="font-custom text-2xl">Album Gallary</h1>
+  </div>
+  <div class="w-full">
+    <app-search-bar
+    [placeholder]="'Search by album ID'"
+    (valueChange)="updateSearch($event)"></app-search-bar>
+  </div>
+  <div class="w-full">
+    <p class="font-custom text-lg" *ngIf="albumId">Displaying photos for album: {{ albumId }}</p>
+  </div>
+</div>
+<app-load-spinner [loading]="loading">
+  <div class="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-4 px-4">
+    <div class="h-72" *ngFor="let album of albums">
+      <app-card>
+        <img class="mx-auto" [src]="album.thumbnailUrl"/>
+        <p class="font-custom text-sm mt-2">{{ album.title }}</p>
+      </app-card>
+    </div>
+  </div>
+  <app-no-items
+    *ngIf="albums.length === 0"
+    [message]="'No photos found'"></app-no-items>
+</app-load-spinner>

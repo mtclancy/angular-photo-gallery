@@ -1,4 +1,4 @@
-import { RouterReducerState } from "@ngrx/router-store";
+import { RouterReducerState } from '@ngrx/router-store';
 
 export interface AppState {
   router: RouterReducerState<any>;
