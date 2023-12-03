@@ -13,13 +13,17 @@
 </div>
 <app-load-spinner [loading]="loading">
   <div class="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-4 px-4">
-    <div class="h-72" *ngFor="let album of albums">
+    <div class="h-72" *ngFor="let album of albums; index as i">
       <app-card>
-        <img
-        downloadImage
-        [fileUrl]="album.url"
-        class="mx-auto" [src]="album.thumbnailUrl"/>
+        <img class="mx-auto" [src]="album.thumbnailUrl"/>
         <p class="font-custom text-sm mt-2">{{ album.title }}</p>
+        <div
+          downloadImage
+          [imageTitle]="'album-' + albumId + '-image-' + i + '.jpg'"
+          [fileUrl]="album.url"
+          class="w-full flex justify-end text-slate-400 hover:text-slate-600">
+            <i class="material-icons">download</i>
+          </div>
       </app-card>
     </div>
   </div>

@@ -8,6 +8,7 @@ export class DownloadImageDirective {
   constructor(private http: HttpClient) {}
 
   @Input() fileUrl!: string;
+  @Input() imageTitle = 'image.jpg';
 
   @HostListener('click') onClick() {
     this.downloadImage();
@@ -17,12 +18,14 @@ export class DownloadImageDirective {
     if (!this.fileUrl) {
       return;
     }
-
-    this.http.get(this.fileUrl, { responseType: 'blob' }).subscribe((blob) => {
+    const fileUrl =
+      'http://localhost:3000/proxy-image?url=' +
+      encodeURIComponent(this.fileUrl);
+    this.http.get(fileUrl, { responseType: 'blob' }).subscribe((blob) => {
       const imageBlob = new Blob([blob]);
       const link = document.createElement('a');
       link.href = URL.createObjectURL(imageBlob);
-      link.download = 'image.jpg';
+      link.download = this.imageTitle;
 
       link.style.display = 'none';
       link.click();

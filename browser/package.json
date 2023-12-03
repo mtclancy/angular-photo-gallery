@@ -25,6 +25,7 @@
     "@ngrx/schematics": "16.2.0",
     "@ngrx/store": "16.2.0",
     "@ngrx/store-devtools": "16.2.0",
+    "material-icons": "^1.13.12",
     "my-schematics": "file:my-schematics",
     "npm": "^10.2.4",
     "rxjs": "~7.8.0",
