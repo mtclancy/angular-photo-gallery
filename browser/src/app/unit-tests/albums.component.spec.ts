@@ -5,17 +5,17 @@ import {
   tick,
 } from '@angular/core/testing';
 
-import { AlbumsComponent } from './albums.component';
-import { AlbumService } from '../../services/album.service';
+import { AlbumsComponent } from '../album/views/albums/albums.component';
+import { AlbumService } from '../album/services/album.service';
 import { CoreModule } from 'src/app/core/core.module';
 import { LayoutsModule } from 'src/app/layouts/layouts.module';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Album } from '../../interfaces/album.interface';
+import { Photo } from '../album/interfaces/album.interface';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { AppState } from 'src/app/core/store/app.state';
+import { SharedModule } from '../shared/shared.module';
 
 @Injectable()
 export class MockAlbumService {
@@ -43,8 +43,9 @@ describe('AlbumsComponent', () => {
     albumMockService = jasmine.createSpyObj('AlbumService', ['fetchAlbumById']);
 
     TestBed.configureTestingModule({
+      teardown: { destroyAfterEach: true },
       declarations: [AlbumsComponent],
-      imports: [CoreModule, LayoutsModule, RouterTestingModule],
+      imports: [CoreModule, LayoutsModule, RouterTestingModule, SharedModule],
       providers: [
         { provide: AlbumService, useValue: albumMockService },
         provideMockStore({ initialState }),
@@ -54,16 +55,16 @@ describe('AlbumsComponent', () => {
     fixture = TestBed.createComponent(AlbumsComponent);
     component = fixture.componentInstance;
     store = TestBed.inject(MockStore);
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
-  it('test ngOnInit', fakeAsync(() => {
+  it('fetchAlbumById should be called', fakeAsync(() => {
     const queryParams = { albumId: '1' };
-    const mockAlbums: Album[] = [
+    const mockAlbums: Photo[] = [
       {
         albumId: 1,
         id: 2,
@@ -74,9 +75,11 @@ describe('AlbumsComponent', () => {
     ];
 
     albumMockService.fetchAlbumById.and.returnValue(of(mockAlbums));
+    expect(component.photos).toEqual([]);
     fixture.detectChanges();
-    tick(1000);
-    fixture.detectChanges();
+    tick(10);
+    expect(component.photos).toEqual(mockAlbums);
+
     expect(albumMockService.fetchAlbumById).toHaveBeenCalledWith(
       queryParams.albumId
     );

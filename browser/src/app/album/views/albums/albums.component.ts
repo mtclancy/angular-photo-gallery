@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AlbumService } from '../../services/album.service';
-import { Album } from '../../interfaces/album.interface';
+import { Photo } from '../../interfaces/album.interface';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectQueryParams } from 'src/app/core/store/router/router.selectors';
@@ -19,11 +19,15 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   ) {}
 
   unsubscribe$ = new Subject();
-  albums: Array<Album> = [];
+  photos: Array<Photo> = [];
   albumId: string = '';
   loading = false;
 
   ngOnInit(): void {
+    this.subscribeToRouteChanges();
+  }
+
+  subscribeToRouteChanges() {
     this.store
       .select(selectQueryParams)
       .pipe(
@@ -34,8 +38,8 @@ export class AlbumsComponent implements OnInit, OnDestroy {
           return this.albumService.fetchAlbumById(this.albumId);
         })
       )
-      .subscribe((albums: Array<Album>) => {
-        this.albums = albums;
+      .subscribe((photos: Array<Photo>) => {
+        this.photos = photos;
         this.loading = false;
       });
   }

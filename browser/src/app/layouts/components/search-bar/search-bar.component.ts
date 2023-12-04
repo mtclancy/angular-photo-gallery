@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subject, debounceTime } from 'rxjs';
 
@@ -7,9 +15,9 @@ import { Subject, debounceTime } from 'rxjs';
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
 })
-export class SearchBarComponent {
+export class SearchBarComponent implements OnInit, OnChanges {
   @Input() placeholder = 'search';
-  @Input() defaultSearch: string | undefined;
+  @Input() initialValue: string | undefined;
   @Output() valueChange = new EventEmitter<string>();
   searchControl = new FormControl();
   subject$ = new Subject<string>();
@@ -20,6 +28,16 @@ export class SearchBarComponent {
       .subscribe((searchText: string) => {
         this.valueChange.emit(searchText);
       });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.initialValue) {
+      this.updateSearchValue(this.initialValue);
+    }
+  }
+
+  updateSearchValue(value: string) {
+    this.searchControl.setValue(value, { emitEvent: false });
   }
 
   ngOnDestroy(): void {

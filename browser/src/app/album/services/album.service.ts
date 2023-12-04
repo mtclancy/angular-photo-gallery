@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/app/environments/environment';
-import { Album } from '../interfaces/album.interface';
+import { Photo } from '../interfaces/album.interface';
 
 @Injectable()
 export class AlbumService {
@@ -10,7 +10,7 @@ export class AlbumService {
   fetchAlbumById(id: string) {
     const params = new HttpParams().set('albumId', id);
 
-    return this.http.get<Array<Album>>(`${environment.albumApiUrl}`, {
+    return this.http.get<Array<Photo>>(`${environment.albumApiUrl}`, {
       params,
     });
   }

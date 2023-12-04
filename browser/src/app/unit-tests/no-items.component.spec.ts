@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NoItemsComponent } from './no-items.component';
+import { NoItemsComponent } from '../layouts/components/no-items/no-items.component';
 
 describe('NoItemsComponent', () => {
   let component: NoItemsComponent;
@@ -8,7 +8,7 @@ describe('NoItemsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NoItemsComponent]
+      declarations: [NoItemsComponent],
     });
     fixture = TestBed.createComponent(NoItemsComponent);
     component = fixture.componentInstance;
