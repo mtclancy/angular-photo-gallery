@@ -13,21 +13,23 @@
   </div>
 </div>
 <app-load-spinner [loading]="loading">
-  <div class="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-4 px-4">
-    <div class="h-72" *ngFor="let photo of photos; index as i">
-      <app-card>
-        <img class="mx-auto" [src]="photo.thumbnailUrl"/>
-        <p class="font-custom text-sm mt-2">{{ photo.title }}</p>
-        <div
-          downloadImage
-          [imageTitle]="'album-' + albumId + '-image-' + i + '.jpg'"
-          [fileUrl]="photo.url"
-          class="w-full flex justify-end text-slate-400 hover:text-slate-600">
-            <i class="material-icons">download</i>
-          </div>
-      </app-card>
-    </div>
-  </div>
+  <ng-container *ngIf="photos.length > 0">
+    <cdk-virtual-scroll-viewport class="w-full h-screen grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-4 px-4" itemSize="20">
+      <div class="h-72" *cdkVirtualFor="let photo of photos; index as i">
+        <app-card>
+          <img class="mx-auto" [src]="photo.thumbnailUrl"/>
+          <p class="font-custom text-sm mt-2">{{ photo.title }}</p>
+          <div
+            downloadImage
+            [imageTitle]="'album-' + albumId + '-image-' + i + '.jpg'"
+            [fileUrl]="photo.url"
+            class="w-full flex justify-end text-slate-400 hover:text-slate-600">
+              <i class="material-icons">download</i>
+            </div>
+        </app-card>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </ng-container>
   <app-no-items
     *ngIf="photos.length === 0"
     [message]="notItemsMessage"></app-no-items>
