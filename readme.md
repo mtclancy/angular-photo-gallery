@@ -19,7 +19,7 @@ When looking through this project users should be able to do the following:
 
 Next steps:
 
-- To improve browser load time, only load images that are in the viewport using intersection observer.
+- To improve browser load time, implement angular cdk virtual scroll. Checkout branch `virtual-scroll`. Image load works, but an issue with the grid layout and media queries remains.
 
 ## Running the project
 
