@@ -22,6 +22,7 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   photos: Array<Photo> = [];
   albumId: string = '';
   loading = false;
+  notItemsMessage: string = '';
 
   ngOnInit(): void {
     this.subscribeToRouteChanges();
@@ -33,6 +34,9 @@ export class AlbumsComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.unsubscribe$),
         switchMap((params: { [key: string]: string }) => {
+          this.notItemsMessage = params['albumId']
+            ? 'No photos found'
+            : 'Enter an album id, for example 1';
           this.albumId = params['albumId'] ? params['albumId'] : '';
           this.loading = true;
           return this.albumService.fetchAlbumById(this.albumId);
