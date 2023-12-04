@@ -30,7 +30,7 @@ From the root of the project, the following Docker commands can be used:
 - Start the app: `docker compose up`
 - Stop the app: `docker compose down`
 
-Once the containers are up, and the Angular app is done compiling, launch the app in your browser at localhost:4200.
+Once the containers are up, and the Angular app is done compiling, launch the app in your browser at [localhost:4200](http://localhost:4200).
 
 ## Local Development
 
