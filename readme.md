@@ -38,4 +38,4 @@ Once the containers are up, and the Angular app is done compiling, launch the ap
 
 Unit tests can be found at `browser/app/unit-tests`. These unit tests do not cover all code in this application, but provide a number of different test cases and examples (see search-bar.component.spec.ts and albums.component.spec.ts).
 
-To run unit tests, navigate to the `browser` directory inside a terminal, and run `ng test`.
+To run unit tests, navigate to the `browser` directory inside a terminal, and run `ng test`...
